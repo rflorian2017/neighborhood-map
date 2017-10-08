@@ -8,11 +8,11 @@
 <body>
 	
 	<div>
-		<h2>Dobeta Turnu-Severin Locations</h2>
+		<h2>Drobeta Turnu-Severin Locations</h2>
 		<input id="filterMarkers" placeholder="Filter markers" autofocus>
 		<input id="submit-btn" type="submit" value="Filter">
-		<ul data-bind="foreach: locations">
-			<li data-bind="text: title, click: populateMarkerInfo"></li>
+		<ul data-bind="foreach: neighborhoodLocations">
+			<li data-bind="text: title, click: populateInfoWindow"></li>
 	</div>
 	<div id="map"></div>
 	
