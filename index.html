@@ -9,9 +9,10 @@
 	
 	<div>
 		<h2>Drobeta Turnu-Severin Locations</h2>
-		<input id="filterMarkers" placeholder="Filter markers" autofocus>
+		<input id="filterMarkers" placeholder="Filter markers" data-bind="textInput: filterForLocations, valueUpdate: 'afterkeydown'" autofocus>
+		<!--	Thanks to this for help related to the filter : http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html -->
 		<input id="submit-btn" type="submit" value="Filter">
-		<ul data-bind="foreach: neighborhoodLocations">
+		<ul data-bind="foreach: filterLocations">
 			<li data-bind="text: title, click: populateInfoWindow"></li>
 	</div>
 	<div id="map"></div>
@@ -19,6 +20,6 @@
 	<script src="js/lib/jquery.js"></script>
     <script src="js/lib/knockout-3.4.2.js"></script>
     <script src="js/app.js"></script>
-	<script async defer src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDb6AfATDJUeWOWsCqJrvgJzWOaGREhn0w&callback=initMap"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDb6AfATDJUeWOWsCqJrvgJzWOaGREhn0w&callback=initMap"></script>
 </body>
 </html>
