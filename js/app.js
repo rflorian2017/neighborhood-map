@@ -165,7 +165,7 @@ var NeighborhodLocation = function(data) {
             this.marker.setMap(null);
         }
     }, this);
-}
+};
 
 /* initial function, linked from the HTML for creating the map item and applying KO bindings*/
 function initMap() {
@@ -185,7 +185,7 @@ var ViewModel = function() {
     infowindow = new google.maps.InfoWindow();
     this.filterForLocations = ko.observable("");
 
-    for (locationItem of initialLocations) {
+    for (var locationItem of initialLocations) {
         self.neighborhoodLocations.push(new NeighborhodLocation(locationItem));
     }
 
@@ -206,7 +206,7 @@ var ViewModel = function() {
             });
         }
     }, self);
-}
+};
 
 function errorCall() {
     document.getElementById("map").innerHTML = "The map could not be loaded";
