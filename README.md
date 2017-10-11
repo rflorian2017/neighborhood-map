@@ -18,5 +18,11 @@ Or you can clone or download the [repository] (https://github.com/rflorian2017/n
 
 `Hope you enjoy !`
 
+Reference: 
+
+1. [http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html] (http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html)
+2. [https://github.com/lastres0rt/udacity-neighborhood-map-project] (https://github.com/lastres0rt/udacity-neighborhood-map-project)
+3. [https://github.com/rflorian2017/Lesson2_portfolio] (https://github.com/rflorian2017/Lesson2_portfolio)
+
 
 
