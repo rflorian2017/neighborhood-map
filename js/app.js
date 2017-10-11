@@ -6,7 +6,8 @@ const initialLocations = [
 			lat:44.629859,
 			lng:22.6499349
 		},
-		caption: 'Turnul de apa'
+		caption: 'Turnul de apa drobeta',
+		captionFlickr: 'castelul de apa drobeta'
 	}, 
 	{
 		title: 'Cinetic Fountain',
@@ -15,7 +16,8 @@ const initialLocations = [
 			lat:44.624336,
 			lng:22.6521189
 		},
-		caption: 'Fantana cinetica'
+		caption: 'Fantana cinetica drobeta',
+		captionFlickr: 'Fantana cinetica drobeta'
 	}	
 ];
 
@@ -23,6 +25,7 @@ var map;
 var infowindow;
 const clientId = "PLKEOUJEJ3BRRWWUDCPMBCPZHWOYKDGEHUDTPOZQPVFMGU15";
 const clientSecret = "ZS2XQVPW1JZLHQYRJD50JTX4PPNGV1LEENOEVJGVZSFM5L0U";
+const flickrApiKey = '314de7a5eaa02b76ab2438beaefe1898';
 
 /* Dr. Babes street, the place where I spent my childhood. It has wonderful memories.
 Thanks to my parents, especially to my mom, who made me what I am today ! */
@@ -34,6 +37,7 @@ var NeighborhodLocation = function(data) {
 	this.location = data.location;
 	this.visible = ko.observable(true);
 	this.caption = data.caption;
+	this.captionFlickr = data.captionFlickr;
 	this.venueName = '';
 	
 	this.marker = new google.maps.Marker({
@@ -63,9 +67,19 @@ var NeighborhodLocation = function(data) {
 		this.contentOfInfoWindow = 'The request could not be completed';
 	});
 	
+	this.imgSrc = '';
+	
+	let flickrRequestUrl = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key='+flickrApiKey+'&text='+this.captionFlickr+'&format=json&nojsoncallback=1';
+	$.getJSON(flickrRequestUrl).done(function(data) {
+		self.imgSrc = 'https://farm'+data.photos.photo[0].farm+'.staticflickr.com/'+data.photos.photo[0].server +'/'+data.photos.photo[0].id+'_'+data.photos.photo[0].secret+'_q.jpg';
+	}).fail(function() {
+		this.contentOfInfoWindow = 'The request could not be completed';
+	});
+	
 	this.populateInfoWindow = function() {
 		let contentOfInfoWindow = '';
 		let idOfVenue = '';
+		map.panTo(self.location);
 		
 		if (self.marker.getAnimation() !== null) {
           self.marker.setAnimation(null);
@@ -78,7 +92,7 @@ var NeighborhodLocation = function(data) {
         // Check to make sure the infowindow is not already opened on this marker.
         if (infowindow.marker != self.marker) {
 			infowindow.marker = self.marker;
-            infowindow.setContent('<h4>' + self.venueName + '</h4><div>' + self.placeDescription + '<div>');
+            infowindow.setContent('<h4>' + self.venueName + '</h4><div>' + self.placeDescription + '<div>' + '<img src='+ self.imgSrc +'></img>');
             infowindow.open(map, self.marker);
           // Make sure the marker property is cleared if the infowindow is closed.
             infowindow.addListener('closeclick', function() {
@@ -99,9 +113,7 @@ var NeighborhodLocation = function(data) {
 }
 	
 function initMap() {
-	
 	var markers = [];
-	console.log("here");
     map = new google.maps.Map(document.getElementById('map'), {
     center: myHomeLocation,
     zoom: 14
@@ -123,6 +135,9 @@ var ViewModel = function() {
 	this.filterLocations = ko.pureComputed(function() {
 		var filter = self.filterForLocations();
         if(!filter) {
+			self.neighborhoodLocations().forEach(function(location){
+				location.visible(true);
+			});
             return self.neighborhoodLocations(); 
         } else {
             return ko.utils.arrayFilter(self.neighborhoodLocations(), function(item) {
