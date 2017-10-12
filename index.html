@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Drobeta Turnu-Severin Neighborhood Map</title>
-	<meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta charset="UTF-8">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
     <!-- External framework css + fonts-->
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-	<!-- bootstrap js and jquery -->
-	<script src="js/lib/jquery.js"></script>
-    <script src="js/lib/bootstrap.min.js"></script>
-	
 </head>
+
 <body>
-	<section class="responsive-container">
-		<header class="row header-section">
-			<h2 class="location-header col-2">Drobeta Turnu-Severin</h2>
-			<!--div class="col-10 icon-expand" data-bind="click: expandList">
+    <section class="responsive-container">
+        <header class="row header-section">
+            <h2 class="location-header col-2">Drobeta Turnu-Severin</h2>
+            <!--div class="col-10 icon-expand" data-bind="click: expandList">
 				<div class="bar"></div>
 				<div class="bar"></div>
 				<div class="bar"></div>
 			</div-->
-		</header>
-		<div class="row markers">
-			<div class="col-2">
-				<input id="filterMarkers" placeholder="Filter markers" data-bind="textInput: filterForLocations, valueUpdate: 'afterkeydown'" autofocus>
-				<!--	Thanks to this for help related to the filter : http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html -->
-				<ul class="location-list" data-bind="foreach: filterLocations">
-					<li data-bind="text: title, click: populateInfoWindow"></li>
-			</div>
-			<div class="col-10" id="map"></div>
-		</div>
-	</section>
-	
-	
+        </header>
+        <div class="row markers">
+            <div class="col-2">
+                <input id="filterMarkers" placeholder="Filter markers" data-bind="textInput: filterForLocations, valueUpdate: 'afterkeydown'" autofocus>
+                <!--	Thanks to this for help related to the filter : http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html -->
+                <ul class="location-list" data-bind="foreach: filterLocations">
+                    <li data-bind="text: title, click: populateInfoWindow"></li>
+				</ul>
+            </div>
+            <main class="col-10" id="map"></main>
+        </div>
+    </section>
+
+	<!-- bootstrap js and jquery -->
+    <script src="js/lib/jquery.js"></script>
+    <script src="js/lib/bootstrap.min.js"></script>
     <script src="js/lib/knockout-3.4.2.js"></script>
     <script src="js/app.js"></script>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDb6AfATDJUeWOWsCqJrvgJzWOaGREhn0w&callback=initMap" onerror="errorCall"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDb6AfATDJUeWOWsCqJrvgJzWOaGREhn0w&callback=initMap" onerror="errorCall()"></script>
 </body>
+
 </html>
